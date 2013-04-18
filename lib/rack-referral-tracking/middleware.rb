@@ -10,7 +10,7 @@ module Rack
       def call(env)
         @app.call(env)
 
-        referer = Fernet.generate(ENV['secret']) do |generator|
+        referer = Fernet.generate(SECRET) do |generator|
           generator.data = { request.env["HTTP_REFERER"] }
         end
 
