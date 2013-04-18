@@ -26,7 +26,8 @@ module Rack
         Rack::Utils.set_cookie_header!(headers, "utm_campaign", :value => params['utm_campaign'], :domain => cookie_domain, :path => '/') if params['utm_campaign'].present?
         Rack::Utils.set_cookie_header!(headers, "utm_source", :value => params['utm_source'], :domain => cookie_domain, :path => '/') if params['utm_source'].present?
         Rack::Utils.set_cookie_header!(headers, "utm_medium", :value => params['utm_medium'], :domain => cookie_domain, :path => '/') if params['utm_medium'].present?
-        Rack::Utils.set_cookie_header!(headers, "ref", :value => params['referer'], :domain => cookie_domain, :path => '/') if params['referer'].present?
+        Rack::Utils.set_cookie_header!(headers, "ref", :value => referer, :domain => cookie_domain, :path => '/') if referer
+
 
         [status, headers, body]
       end
