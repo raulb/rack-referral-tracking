@@ -19,7 +19,7 @@ Or install it yourself as:
 
 ## Usage
 
-    use Rack::ReferralTracking
+    use Rack::ReferralTracking::Middleware
 
 ## Contributing
 
