@@ -1,3 +1,4 @@
+require 'domainatrix'
 require 'fernet'
 require 'uri'
 
