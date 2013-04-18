@@ -1,4 +1,6 @@
+require 'fernet'
 require 'uri'
+
 module Rack
   module ReferralTracking
     class Middleware
