@@ -25,7 +25,7 @@ module Rack
         Rack::Utils.set_cookie_header!(headers, "utm_medium", :value => params['utm_medium'], :expires => COOKIE_EXPIRES, :domain => uri.host) if params['utm_medium'].present?
         Rack::Utils.set_cookie_header!(headers, "ref", :value => params['referer'], :expires => COOKIE_EXPIRES, :domain => uri.host) if params['referer'].present?
 
-        status, headers, body
+        [status, headers, body]
       end
 
       private
