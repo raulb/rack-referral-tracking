@@ -19,6 +19,12 @@ Or install it yourself as:
 
 ## Usage
 
+Set a secure secret in your environment:
+
+    $ export SECRET=50mJn9wvwAXtQ28obpwxD7uMcqJRUquFz+GMRGDB4ZU=
+
+Then in your Rack-based application:
+
     use Rack::ReferralTracking::Middleware
 
 ## Contributing
