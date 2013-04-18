@@ -20,10 +20,10 @@ module Rack
           end
         end
 
-        Rack::Utils.set_cookie_header!(headers, "utm_campaign", :value => params[:utm_campaign], :expires => COOKIE_EXPIRES,:domain => uri.host }) if params[:utm_campaign].present?
-        Rack::Utils.set_cookie_header!(headers, "utm_source", :value => params[:utm_source], :expires => COOKIE_EXPIRES,:domain => uri.host }) if params[:utm_source].present?
-        Rack::Utils.set_cookie_header!(headers, "utm_medium", :value => params[:utm_medium], :expires => COOKIE_EXPIRES,:domain => uri.host }) if params[:utm_medium].present?
-        Rack::Utils.set_cookie_header!(headers, "ref", :value => params[:referer], :expires => COOKIE_EXPIRES,:domain => uri.host }) if params[:referer].present?
+        Rack::Utils.set_cookie_header!(headers, "utm_campaign", :value => params['utm_campaign'], :expires => COOKIE_EXPIRES, :domain => uri.host) if params['utm_campaign'].present?
+        Rack::Utils.set_cookie_header!(headers, "utm_source", :value => params['utm_source'], :expires => COOKIE_EXPIRES, :domain => uri.host) if params['utm_source'].present?
+        Rack::Utils.set_cookie_header!(headers, "utm_medium", :value => params['utm_medium'], :expires => COOKIE_EXPIRES, :domain => uri.host) if params['utm_medium'].present?
+        Rack::Utils.set_cookie_header!(headers, "ref", :value => params['referer'], :expires => COOKIE_EXPIRES, :domain => uri.host) if params['referer'].present?
 
         status, headers, body
       end
