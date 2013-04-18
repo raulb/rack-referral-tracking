@@ -7,8 +7,6 @@ module Rack
       end
 
       def call(env)
-        puts "HAI!\n"
-
         @app.call(env)
       end
 
