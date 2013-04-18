@@ -10,8 +10,6 @@ module Rack
       end
 
       def call(env)
-        @app.call(env)
-
         status, headers, body = @app.call(env)
 
         params = CGI.parse env['QUERY_STRING']
@@ -27,6 +25,7 @@ module Rack
         Rack::Utils.set_cookie_header!(headers, "utm_medium", :value => params[:utm_medium], :expires => COOKIE_EXPIRES,:domain => uri.host }) if params[:utm_medium].present?
         Rack::Utils.set_cookie_header!(headers, "ref", :value => params[:referer], :expires => COOKIE_EXPIRES,:domain => uri.host }) if params[:referer].present?
 
+        status, headers, body
       end
 
       private
