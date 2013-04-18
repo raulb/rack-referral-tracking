@@ -23,10 +23,10 @@ module Rack
           end
         end
 
-        Rack::Utils.set_cookie_header!(headers, "utm_campaign", :value => params['utm_campaign'], :domain => cookie_domain, :path => '/') if params['utm_campaign'].present?
-        Rack::Utils.set_cookie_header!(headers, "utm_source", :value => params['utm_source'], :domain => cookie_domain, :path => '/') if params['utm_source'].present?
-        Rack::Utils.set_cookie_header!(headers, "utm_medium", :value => params['utm_medium'], :domain => cookie_domain, :path => '/') if params['utm_medium'].present?
-        Rack::Utils.set_cookie_header!(headers, "ref", :value => params['referer'], :domain => cookie_domain, :path => '/') if params['referer'].present?
+        Rack::Utils.set_cookie_header!(headers, "utm_campaign", :value => params['utm_campaign'], :domain => cookie_domain, :path => '/') if params.has_key? ['utm_campaign']
+        Rack::Utils.set_cookie_header!(headers, "utm_source", :value => params['utm_source'], :domain => cookie_domain, :path => '/') if params.has_key?['utm_source']
+        Rack::Utils.set_cookie_header!(headers, "utm_medium", :value => params['utm_medium'], :domain => cookie_domain, :path => '/') if params.has_key?['utm_medium']
+        Rack::Utils.set_cookie_header!(headers, "ref", :value => referer, :domain => cookie_domain, :path => '/') if referer
 
         [status, headers, body]
       end
@@ -34,7 +34,11 @@ module Rack
       private
 
       def referred_from_outside?(env)
-        env.has_key? 'HTTP_REFERER'
+        if env.has_key? 'HTTP_REFERER'
+          refererer_domain = Domainatrix.parse(env['HTTP_REFERER']).domain_with_tld
+          host             = Domainatrix.parse(env["SERVER_NAME"]).domain_with_tld
+          host != refererer_domain 
+        end
       end
 
     end
