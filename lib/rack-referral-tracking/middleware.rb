@@ -1,4 +1,6 @@
+require 'fernet'
 require 'uri'
+
 module Rack
   module ReferralTracking
     class Middleware
@@ -10,8 +12,12 @@ module Rack
       def call(env)
         @app.call(env)
 
-        referer = Fernet.generate(SECRET) do |generator|
-          generator.data = { request.env["HTTP_REFERER"] }
+        params = CGI.parse env['QUERY_STRING']
+
+        if referred_from_outside?(env)
+          referer = Fernet.generate(ENV['SECRET']) do |generator|
+            generator.data = { :referrer => env["HTTP_REFERER"] }
+          end
         end
 
         cookies[:utm_campaign] = { :value => params[:utm_campaign], :expires => COOKIE_EXPIRES,:domain => uri.host } if params[:utm_campaign].present?
@@ -19,6 +25,12 @@ module Rack
         cookies[:utm_medium] = { :value => params[:utm_medium], :expires => COOKIE_EXPIRES,:domain => uri.host } if params[:utm_medium].present?
         cookies[:ref] = {:value => referer, :expires => COOKIE_EXPIRES,:domain => uri.host }
 
+      end
+
+      private
+
+      def referred_from_outside?(env)
+        env.has_key? 'HTTP_REFERER'
       end
 
     end
