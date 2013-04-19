@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.email         = ["himself@mattonrails.com"]
   gem.description   = %q{Remember a visitor's referrer across subdomains}
   gem.summary       = %q{Remember a visitor's referrer across subdomains}
-  gem.homepage      = ""
+  gem.homepage      = "https://github.com/craigkerstiens/rack-referral-tracking"
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
