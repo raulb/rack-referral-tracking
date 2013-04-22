@@ -18,8 +18,12 @@ module Rack
         cookie_domain = '.' + host
 
         if referred_from_outside?(env)
-          referer = Fernet.generate(ENV['REFERRAL_SECRET']) do |generator|
-            generator.data = { :referrer => env["HTTP_REFERER"] }
+          if env.has_key? 'REFERRAL_SECRET'
+            referer = Fernet.generate(ENV['REFERRAL_SECRET']) do |generator|
+              generator.data = { :referrer => env["HTTP_REFERER"] }
+            end
+          else
+            referer = nil
           end
         end
 
