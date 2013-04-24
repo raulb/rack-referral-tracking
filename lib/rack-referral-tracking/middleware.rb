@@ -20,7 +20,7 @@ module Rack
         if referred_from_outside?(env)
           puts 'outside referal'
           puts env['REFERRAL_SECRET']
-          if env.has_key? 'REFERRAL_SECRET'
+          if env.has_key?('REFERRAL_SECRET')
             puts "has key"
             referer = Fernet.generate(ENV['REFERRAL_SECRET']) do |generator|
               generator.data = { :referrer => env["HTTP_REFERER"] }
