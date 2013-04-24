@@ -19,9 +19,13 @@ module Rack
 
         if referred_from_outside?(env)
           if env.has_key? 'REFERRAL_SECRET'
+            puts "has key"
             referer = Fernet.generate(ENV['REFERRAL_SECRET']) do |generator|
               generator.data = { :referrer => env["HTTP_REFERER"] }
             end
+            puts "referrer"
+            puts referer
+            puts "------------------"
           else
             referer = nil
           end
@@ -43,11 +47,11 @@ module Rack
           host             = Domainatrix.parse(env["HTTP_HOST"]).domain_with_tld
           
           puts 'REFERRER_DOMAIN'
-          puts env['HTTP_REFERER']
+          puts refererer_domain
           puts '----------------------'
           puts 'HOST'
           puts env["HTTP_HOST"]
-          puts '----------------------'
+          puts host
           host != refererer_domain
         end
       end
