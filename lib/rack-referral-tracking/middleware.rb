@@ -18,6 +18,8 @@ module Rack
         cookie_domain = '.' + host
 
         if referred_from_outside?(env)
+          puts 'outside referal'
+          puts env
           if env.has_key? 'REFERRAL_SECRET'
             puts "has key"
             referer = Fernet.generate(ENV['REFERRAL_SECRET']) do |generator|
@@ -43,16 +45,16 @@ module Rack
 
       def referred_from_outside?(env)
         if env.has_key? 'HTTP_REFERER'
-          refererer_domain = Domainatrix.parse(env['HTTP_REFERER']).domain_with_tld
-          host             = Domainatrix.parse(env["HTTP_HOST"]).domain_with_tld
+          referer_domain = Domainatrix.parse(env['HTTP_REFERER']).domain_with_tld
+          host           = Domainatrix.parse(env["HTTP_HOST"]).domain_with_tld
           
           puts 'REFERRER_DOMAIN'
-          puts refererer_domain
+          puts referer_domain
           puts '----------------------'
           puts 'HOST'
-          puts env["HTTP_HOST"]
           puts host
-          host != refererer_domain
+          puts '----------------------'
+          host != referer_domain
         end
       end
 
