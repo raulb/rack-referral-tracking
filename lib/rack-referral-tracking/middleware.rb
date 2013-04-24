@@ -40,7 +40,7 @@ module Rack
       def referred_from_outside?(env)
         if env.has_key? 'HTTP_REFERER'
           refererer_domain = Domainatrix.parse(env['HTTP_REFERER']).domain_with_tld
-          host             = Domainatrix.parse(env["SERVER_NAME"]).domain_with_tld
+          host             = Domainatrix.parse(env["HTTP_HOST"]).domain_with_tld
           host != refererer_domain
         end
       end
