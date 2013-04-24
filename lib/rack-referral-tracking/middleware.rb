@@ -41,11 +41,12 @@ module Rack
         if env.has_key? 'HTTP_REFERER'
           refererer_domain = Domainatrix.parse(env['HTTP_REFERER']).domain_with_tld
           host             = Domainatrix.parse(env["HTTP_HOST"]).domain_with_tld
+          
           puts 'REFERRER_DOMAIN'
-          puts refererer_domain
+          puts env['HTTP_REFERER']
           puts '----------------------'
           puts 'HOST'
-          puts host
+          puts env["HTTP_HOST"]
           puts '----------------------'
           host != refererer_domain
         end
