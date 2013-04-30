@@ -1,5 +1,7 @@
 # Rack::Referral::Tracking
 
+[![Code Climate](https://codeclimate.com/github/craigkerstiens/rack-referral-tracking.png)](https://codeclimate.com/github/craigkerstiens/rack-referral-tracking)
+
 Rack middleware that detects requests from a referral and places some details
 about the referral in a user's cookies.
 
