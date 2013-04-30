@@ -4,5 +4,6 @@ require 'minitest/autorun'
 require 'minitest/spec'
 
 require 'rack/mock'
+require 'rack/test'
 
 require 'rack-referral-tracking'
