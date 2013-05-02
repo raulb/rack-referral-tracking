@@ -19,5 +19,7 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency 'domainatrix'
   gem.add_dependency 'fernet'
+  gem.add_dependency 'rack'
+  gem.add_development_dependency 'rack-test'
   gem.add_development_dependency 'rake'
 end
