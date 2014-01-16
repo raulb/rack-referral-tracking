@@ -28,10 +28,10 @@ module Rack
           end
         end
 
-        Rack::Utils.set_cookie_header!(headers, "utm_campaign", :value => params['utm_campaign'], :domain => cookie_domain, :path => '/') if params.has_key? 'utm_campaign'
-        Rack::Utils.set_cookie_header!(headers, "utm_source", :value => params['utm_source'], :domain => cookie_domain, :path => '/') if params.has_key? 'utm_source'
-        Rack::Utils.set_cookie_header!(headers, "utm_medium", :value => params['utm_medium'], :domain => cookie_domain, :path => '/') if params.has_key? 'utm_medium'
-        Rack::Utils.set_cookie_header!(headers, "ref", :value => referer, :domain => cookie_domain, :path => '/') if referer
+        Rack::Utils.set_cookie_header!(headers, "utm_campaign", :value => params['utm_campaign'], :domain => cookie_domain, :path => '/', :httponly => true, :secure => true) if params.has_key? 'utm_campaign'
+        Rack::Utils.set_cookie_header!(headers, "utm_source", :value => params['utm_source'], :domain => cookie_domain, :path => '/', :httponly => true, :secure => true) if params.has_key? 'utm_source'
+        Rack::Utils.set_cookie_header!(headers, "utm_medium", :value => params['utm_medium'], :domain => cookie_domain, :path => '/', :httponly => true, :secure => true) if params.has_key? 'utm_medium'
+        Rack::Utils.set_cookie_header!(headers, "ref", :value => referer, :domain => cookie_domain, :path => '/', :httponly => true, :secure => true) if referer
 
         [status, headers, body]
       end
