@@ -32,7 +32,7 @@ module Rack
         Rack::Utils.set_cookie_header!(headers, "utm_source", :value => params['utm_source'], :domain => cookie_domain, :path => '/', :httponly => true, :secure => true) if params.has_key? 'utm_source'
         Rack::Utils.set_cookie_header!(headers, "utm_medium", :value => params['utm_medium'], :domain => cookie_domain, :path => '/', :httponly => true, :secure => true) if params.has_key? 'utm_medium'
         Rack::Utils.set_cookie_header!(headers, "ref", :value => referer, :domain => cookie_domain, :path => '/', :httponly => true, :secure => true) if referer
-
+        body.close if body.respond_to?(:close)
         [status, headers, body]
       end
 
